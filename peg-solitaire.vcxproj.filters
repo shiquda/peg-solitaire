@@ -24,18 +24,12 @@
     <ClCompile Include="core.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphic.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="core.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="menu.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
