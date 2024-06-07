@@ -127,6 +127,16 @@ void Game::print_graphic(bool show_only) {
 	_stprintf_s(s, _T("剩余棋子数量：%d"), chess_count);
 	outtextxy(left + BOARD_SIZE * 50 + 100, 50, s);
 
+	// 画撤销按钮
+	Button undo_button(left + BOARD_SIZE * 50 + 200, 400, 200, 50, L"撤销", [](){});
+	undo_button.draw();
+
+	// 测试算法
+	int min_chess_count_backup = min_chess_count;
+	suggestion();
+	min_chess_count = min_chess_count_backup;
+	std::cout << min_chess_count << std::endl;
+	std::cout << suggestion_x1 << " " << suggestion_y1 << " " << suggestion_x2 << " " << suggestion_y2 << std::endl;
 
 	if (show_only) return;
 	while (1)
@@ -137,6 +147,7 @@ void Game::print_graphic(bool show_only) {
 		{
 			int cx = m.x;
 			int cy = m.y;
+			// 选中棋子
 			if (cx >= left - 25 && cx <= left + BOARD_SIZE * 50 && cy >= upper - 25 && cy <= upper + BOARD_SIZE * 50)
 			{
 				int i = (cy - upper + 25) / 50;
@@ -145,14 +156,15 @@ void Game::print_graphic(bool show_only) {
 				select(i, j);
 				break;
 			}
-			//for (int i = 0; i < chesses.size(); i++)
-			//{
-			//	if (chesses[i].receive_event(cx, cy)) break;
-			//}
-			//for (int i = 0; i < spaces.size(); i++)
-			//{
-			//	if (spaces[i].receive_event(cx, cy)) break;
-			//}
+			// 监听撤销
+			else if (cx >= left + BOARD_SIZE * 50 + 200 - 100 && cx <= left + BOARD_SIZE * 50 + 200 + 100 && cy >= 400 - 50 && cy <= 400 + 50)
+			{
+				if (undo_flag)
+				{
+					undo();
+					break;
+				}
+			}
 		}
 	}
 }	
