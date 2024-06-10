@@ -44,7 +44,7 @@ void clear_screen();
 void print_win();
 void print_lose(int chess_count);
 void wait_for_confirm();
-void print_algo_limit();
+void print_algo_limit(bool endgame = false);
 void print_undo_limit();
 void print_help();
 void draw_return_arrow();

@@ -2,8 +2,6 @@
 
 #include <unordered_map>
 #include <string>
-#include <queue>
-
 
 #define BOARD_SIZE 7
 #define CHESS_COUNT 32
@@ -26,8 +24,9 @@ public:
 	int suggestion_x1, suggestion_y1, suggestion_x2, suggestion_y2; // 建议走法
 	int min_chess_count; // 最少棋子数量
 	bool is_quit; // 用户选择退出
+	bool is_endgame; // 是否是残局
 
-    Game();
+    Game(bool endgame = false);
     ~Game();
     bool walk(int x1, int y1, int x2, int y2, bool algo = 0);
     bool is_win();
@@ -56,3 +55,4 @@ private:
 
 
 void start_game();
+void start_endgame();

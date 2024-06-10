@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="algo.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="graphic.cpp" />
     <ClCompile Include="main.cpp" />

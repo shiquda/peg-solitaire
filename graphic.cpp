@@ -88,10 +88,12 @@ void main_menu() {
 
 
 
-	Button start_button(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 150, 50, L"开始游戏！", start_game);
+	Button start_button(WINDOW_WIDTH / 2 - 200 , WINDOW_HEIGHT / 2, 150, 50, L"经典模式", start_game);
+	Button endgame_start_button(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 150, 50, L"残局模式", start_endgame);
 	Button help_button(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 + 100, 150, 50, L"帮助", print_help);
 	Button quit_button(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 + 200, 150, 50, L"退出", []() { exit(0); });
 	start_button.draw();
+	endgame_start_button.draw();
 	help_button.draw();
 	quit_button.draw();
 
@@ -104,6 +106,9 @@ void main_menu() {
 			int cx = m.x;
 			int cy = m.y;
 			if (start_button.receive_event(cx, cy)) {
+				break;
+			}
+			if (endgame_start_button.receive_event(cx, cy)) {
 				break;
 			}
 			if (help_button.receive_event(cx, cy)) {
@@ -221,6 +226,13 @@ void Game::print_graphic(bool show_only) {
 			// 监听算法
 			else if (cx >= left + BOARD_SIZE * 50 + 200 - 50 && cx <= left + BOARD_SIZE * 50 + 200 + 50 && cy >= 500 - 50 && cy <= 500 + 50)
 			{
+				if (is_endgame)
+				{
+					print_algo_limit(is_endgame);
+					std::cout << "残局无法使用提示功能！" << std::endl;
+					wait_for_confirm();
+					break;
+				}
 				if (chess_count < 18)
 				{
 					min_chess_count = chess_count;
@@ -241,7 +253,14 @@ void Game::print_graphic(bool show_only) {
 			// 重置
 			else if (cx >= left + BOARD_SIZE * 50 + 200 - 50 && cx <= left + BOARD_SIZE * 50 + 200 + 50 && cy >= 300 - 50 && cy <= 300 + 50)
 			{
-				start_game();
+				if (is_endgame)
+				{
+					start_endgame();
+				}
+				else 
+				{
+					start_game();
+				}
 				is_quit = 1;
 			 	break;
 			}
@@ -289,9 +308,16 @@ void print_lose(int chess_count) {
 	}
 }
 
-void print_algo_limit(){
+void print_algo_limit(bool endgame){
 	settextcolor(RED);
-	outtextxy(100 + BOARD_SIZE * 50 + 100, 150, _T("当前棋子数过多，无法计算！"));
+	if (endgame)
+	{
+		outtextxy(100 + BOARD_SIZE * 50 + 100, 150, _T("残局无法使用提示功能！"));
+	}
+	else {
+		outtextxy(100 + BOARD_SIZE * 50 + 100, 150, _T("当前棋子数过多，不允许提示！"));
+	}
+	
 }
 
 void print_undo_limit() {
