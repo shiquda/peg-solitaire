@@ -109,7 +109,7 @@ void Game::flip_board(int board[BOARD_SIZE][BOARD_SIZE], int new_board[BOARD_SIZ
 
 void Game::suggestion(bool first) {
 	const bool debug = 1;
-	min_chess_count = std::min(chess_count, min_chess_count);
+	min_chess_count = min(chess_count, min_chess_count);
 
 
 
@@ -121,7 +121,7 @@ void Game::suggestion(bool first) {
 	// 计算当前局面对应的数字
 	unsigned long long board_num = board_to_number(chessboard);
 	if (memo.find(board_num) != memo.end()) { // 已有记录
-		min_chess_count = std::min(memo[board_num].min_chess_count, min_chess_count);
+		min_chess_count = min(memo[board_num].min_chess_count, min_chess_count);
 		if (first) {
 			suggestion_x1 = memo[board_num].x1;
 			suggestion_y1 = memo[board_num].y1;

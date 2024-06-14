@@ -1,11 +1,11 @@
-#include "core.h"
-#include "graphic.h"
-
 #include <cmath>
 #include <iostream>
-#include <cmath>
+//#include <cmath>
+//#include <graphics.h>
 
-
+#include "core.h"
+#include "graphic.h"
+#include "hexagon.h"
 
 Game::Game(bool endgame)
 {	
@@ -66,6 +66,7 @@ Game::Game(bool endgame)
 
 	chess_count = get_chess_count();
 	min_chess_count = chess_count;
+	loadimage(&img, _T("./src/game.jpg"), WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 Game::~Game()
@@ -127,7 +128,8 @@ bool Game::walk(int x1, int y1, int x2, int y2, bool algo)
 	chessboard[(x1 + x2) / 2][(y1 + y2) / 2] = 0;
 	chess_count--;
 	if (!algo) undo_flag = true;
-	if (!algo) min_chess_count = std::min(min_chess_count, chess_count);
+	if (!algo) min_chess_count = min(min_chess_count, chess_count);
+	if (!algo) play_sound(PLACE_CHESS);
 	return true;
 }
 
@@ -215,13 +217,13 @@ void start_game() {
 		{
 			game.print_graphic(1);
 			print_win();
-			wait_for_confirm();
+			wait_for_confirm(0);
 			break;
 		}
 		else if (game.is_lose()) {
 			game.print_graphic(1);
 			print_lose(game.chess_count);
-			wait_for_confirm();
+			wait_for_confirm(0);
 			break;
 		}
 		else if (game.is_quit) // 用户选择退出
@@ -236,19 +238,45 @@ void start_endgame() {
 	Game game(true);
 	while (1)
 	{
-
 		game.print_graphic();
 		if (game.is_win())
 		{
 			game.print_graphic(1);
 			print_win();
-			wait_for_confirm();
+			wait_for_confirm(0);
 			break;
 		}
 		else if (game.is_lose()) {
 			game.print_graphic(1);
 			print_lose(game.chess_count);
-			wait_for_confirm();
+			wait_for_confirm(0);
+			break;
+		}
+		else if (game.is_quit) // 用户选择退出
+		{
+			break;
+		}
+	}
+}
+
+void start_hexagon_game() {
+	HexagonGame game;
+	while (1)
+	{
+		game.print_graphic();
+		if (game.is_win())
+		{
+			game.print_graphic(1);
+			play_sound(WIN);
+			print_win();
+			wait_for_confirm(0);
+			break;
+		}
+		else if (game.is_lose()) {
+			game.print_graphic(1);
+			play_sound(LOSE);
+			print_lose(game.chess_count);
+			wait_for_confirm(0);
 			break;
 		}
 		else if (game.is_quit) // 用户选择退出

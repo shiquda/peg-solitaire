@@ -27,12 +27,18 @@
     <ClCompile Include="algo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="hexagon.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphic.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="core.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hexagon.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

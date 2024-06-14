@@ -130,11 +130,13 @@
     <ClCompile Include="algo.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="graphic.cpp" />
+    <ClCompile Include="hexagon.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.h" />
     <ClInclude Include="graphic.h" />
+    <ClInclude Include="hexagon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
