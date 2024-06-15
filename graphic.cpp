@@ -341,8 +341,7 @@ void HexagonGame::print_graphic(bool show_only) {
 	const int upper = 50;
 	clear_screen();
 	// 添加背景
-	IMAGE img;
-	loadimage(&img, _T("./src/game.jpg"), WINDOW_WIDTH, WINDOW_HEIGHT);
+
 	putimage(0, 0, &img);
 
 	setlinecolor(BLACK);
@@ -536,14 +535,14 @@ void print_help() {
 	putimage(0, 0, &img);
 
 	settextcolor(BLACK);
-	settextstyle(20, 0, _T("黑体"));
-	outtextxy(100, 100, _T("你的目标是尽可能地将棋盘上的所有棋子都移出棋盘，使得最后只剩下一个棋子。"));
-	outtextxy(100, 150, _T("每次使用鼠标点击，选定一颗棋子，选中的棋子会有红色标记。"));
-	outtextxy(100, 200, _T("选中棋子后，跳过直接相邻的一颗棋子，跳到空的孔里，被跳过的棋子被移出棋盘。"));
-	outtextxy(100, 250, _T("每次移动可以是上下左右四个方向，但不能是斜向。"));
-	outtextxy(100, 300, _T("如果没有可以移动的棋子，游戏结束。"));
-	outtextxy(100, 350, _T("在游戏过程中，可以点击右侧的“撤销”按钮，撤销上一步的操作，该功能仅可连续使用一次。"));
-	outtextxy(100, 400, _T("当你的棋子数少于一定数量时，可以点击右侧的“提示”按钮，提示当前最佳的移动方案。"));
+	settextstyle(30, 0, _T("宋体"));	
+	outtextxy(50, 100, _T("你的目标是尽可能地将所有棋子移除，使得最后只剩下一个棋子。"));
+	outtextxy(50, 150, _T("每次使用鼠标点击，选定一颗棋子，选中的棋子会有红色标记。选"));
+	outtextxy(50, 200, _T("中棋子后，跳过直接相邻的一颗棋子，必须跳到空的孔里。每次移"));
+	outtextxy(50, 250, _T("动可以是上下左右四个方向，但不能是斜向。如果没有可以移动的"));
+	outtextxy(50, 300, _T("棋子，游戏结束。失败之前，你可以点击右侧的“撤销”按钮，撤销"));
+	outtextxy(50, 350, _T("上一步的操作，该功能仅可连续使用一次。当你的棋子数少于一定"));
+	outtextxy(50, 400, _T("数量时，可以点击右侧的“提示”按钮，提示当前最佳的移动方案。"));
 
 	// 画圆形箭头返回按钮
 	draw_return_arrow();
